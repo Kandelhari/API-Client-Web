@@ -6,6 +6,8 @@ public class DataBaseValues {
     public static final String ID = "id";
     public static final boolean IS_NOT_NULLABLE = false;
     public static final boolean IS_NULLABLE = true;
+    public static final boolean IS_UNIQUE = true;
+
 
     // this file has the next structure for each table on DB:
 

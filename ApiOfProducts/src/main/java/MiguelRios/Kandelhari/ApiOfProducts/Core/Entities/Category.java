@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = DataBaseValues.TABLE_CATEGORY)
 public class Category {
@@ -26,9 +29,18 @@ public class Category {
             )
     private String name;
 
+    @OneToMany(mappedBy = "categoryID", fetch = FetchType.LAZY)
+    private List<ProductCategory> productCategories = new ArrayList<>();
+
 
     // Getters y Setters
 
+    public List<ProductCategory> getProductCategories() {
+        return productCategories;
+    }
+    public void setProductCategories(List<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
+    }
     public void setId(Long id) {
         this.id = id;
     }

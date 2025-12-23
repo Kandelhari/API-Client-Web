@@ -4,6 +4,9 @@ import MiguelRios.Kandelhari.ApiOfProducts.Core.Entities.ConstantValues.DataBase
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = DataBaseValues.TABLE_PRODUCT)
 public class Product {
@@ -21,7 +24,8 @@ public class Product {
     @Column(
             length = DataBaseValues.PRODUCT_NAME_MAX_SIZE,
             name = DataBaseValues.PRODUCT_NAME,
-            nullable = DataBaseValues.IS_NOT_NULLABLE
+            nullable = DataBaseValues.IS_NOT_NULLABLE,
+            unique = DataBaseValues.IS_UNIQUE
     )
     private String name;
 
@@ -40,9 +44,18 @@ public class Product {
     )
     private Integer amount;
 
+    @OneToMany(mappedBy = "productID", fetch = FetchType.LAZY)
+    private List<ProductCategory> productCategories = new ArrayList<>();
+
 
     // Getters and Setters
 
+    public List<ProductCategory> getProductCategories() {
+        return productCategories;
+    }
+    public void setProductCategories(List<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
+    }
     public void setId(Long id) {
         this.id = id;
     }

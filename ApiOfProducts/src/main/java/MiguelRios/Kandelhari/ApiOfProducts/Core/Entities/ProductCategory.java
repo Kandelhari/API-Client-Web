@@ -12,37 +12,38 @@ public class ProductCategory {
     @Column(name = DataBaseValues.ID)
     private Long id;
 
-    @Column(
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
             name = DataBaseValues.PRODUCTCATEGORY_PRODUCT_ID,
             nullable = DataBaseValues.IS_NOT_NULLABLE
     )
-    private String productID;
+    private Product productID;
 
-    @Column(
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
             name = DataBaseValues.PRODUCTCATEGORY_CATEGORY_ID,
             nullable = DataBaseValues.IS_NOT_NULLABLE
     )
-    private String categoryID;
+    private Category categoryID;
 
 
     // Getters and Setters
 
-    public String getCategoryID() {
-        return categoryID;
-    }
-    public void setCategoryID(String categoryID) {
-        this.categoryID = categoryID;
-    }
-    public String getProductID() {
+    public Product getProductID() {
         return productID;
     }
-    public void setProductID(String productID) {
+    public void setProductID(Product productID) {
         this.productID = productID;
+    }
+    public Category getCategoryID() {
+        return categoryID;
+    }
+    public void setCategoryID(Category categoryID) {
+        this.categoryID = categoryID;
     }
     public void setId(Long id) {
         this.id = id;
     }
-
     public Long getId() {
         return id;
     }
