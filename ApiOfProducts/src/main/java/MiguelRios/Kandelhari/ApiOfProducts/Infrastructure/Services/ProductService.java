@@ -10,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -96,6 +98,20 @@ public class ProductService {
         }
 
         productRepository.deleteAllById(ids);
+    }
+
+    public Map<String, Object> buildProductResponse(ProductListResultDTO result, String searchTerm) {
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("products", result.getProductPage().getContent());
+        response.put("totalItems", result.getTotalItems());
+
+        if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+            response.put("searchTerm", searchTerm);
+            response.put("searchResultsCount", result.getTotalItems());
+        }
+
+        return response;
     }
 
 }
