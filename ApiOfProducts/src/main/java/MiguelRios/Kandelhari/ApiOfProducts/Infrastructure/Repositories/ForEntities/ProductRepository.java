@@ -25,5 +25,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
     long countByNameContaining(@Param("searchTerm") String searchTerm);
 
-
 }
